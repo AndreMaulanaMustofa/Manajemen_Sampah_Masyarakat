@@ -14,13 +14,13 @@ class ProductResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
-    {
+        {
         return [
             'id' => $this->id,
             'price' => $this->price,
             'slug' => $this->slug,
             'name' => $this->name,
-            'picture' => $this->picture ? Storage::url($this->picture) : 'https://fakeimg.pl/200x320/?text=Book&font=noto',
+            'picture' => $this->picture ? Storage::url($this->picture) :  'https://apollo-singapore.akamaized.net/v1/files/oxqjgruy4jgj3-ID/image',
             'category' => [
                 'id' => $this->category->id,
                 'name' => $this->category->name,

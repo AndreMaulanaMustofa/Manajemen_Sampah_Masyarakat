@@ -5,6 +5,7 @@ import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import Select from '@/Components/Select';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -12,6 +13,7 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        phone_number: '',
     });
 
     useEffect(() => {
@@ -44,7 +46,7 @@ export default function Register() {
                         type="text"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="name"
                         isFocused={true}
                         onChange={onChange}
@@ -59,7 +61,7 @@ export default function Register() {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="username"
                         onChange={onChange}
                         required
@@ -73,7 +75,7 @@ export default function Register() {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="new-password"
                         onChange={onChange}
                         required
@@ -87,14 +89,46 @@ export default function Register() {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         onChange={onChange}
                         required
                     />
                 </div>
 
+                <div>
+                    <Label forInput="phone_number" value="Phone Number" />
+
+                    <Input
+                        type="text"
+                        name="phone_number"
+                        value={data.phone_number}
+                        className="block w-full mt-1"
+                        autoComplete="phone_number"
+                        isFocused={true}
+                        onChange={onChange}
+                        required
+                    />
+                </div>
+{/* 
+               <div className="mt-4">
+                <Label forInput={"districs"}>districs</Label> 
+                <Select> 
+                    <option value="Blimbing">Blimbing</option>
+          
+                    <option value="Kedungkandang">Kedungkandang</option>
+
+                    <option value="Klojen">Klojen</option>
+          
+                    <option value="Lowokwaru">Lowokwaru</option>
+
+                    <option value="Sukun">Sukun</option>
+
+                </Select>
+               </div> */}
+
+
                 <div className="flex items-center justify-end mt-4">
-                    <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
+                    <Link href={route('login')} className="text-sm text-gray-600 underline hover:text-gray-900">
                         Already registered?
                     </Link>
 

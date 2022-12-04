@@ -14,7 +14,7 @@ export default function Index(props) {
             
             <Container>
                 {products.length ? (
-                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+                    <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {products.map((product) => (
                             <ProductItem product={product} key={product.id} />
                         ))}

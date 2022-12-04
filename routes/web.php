@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PaymentNoticationController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
         Route::get('carts', 'index');
         Route::delete('carts/delete/{cart}', 'destroy')->name('cart.delete');
         Route::post('carts/add-to-cart/{product:slug}', 'store')->name('cart.store');
+    });
+    Route::controller(ProfileController::class)->group(function(){
+        Route::get('profile','index');
+        // Route::post('profile/update/{user:slug}','update')->name('user.update');
     });
 });
 

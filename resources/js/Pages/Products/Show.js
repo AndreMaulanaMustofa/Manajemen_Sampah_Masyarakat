@@ -22,12 +22,12 @@ export default function Show({product, auth, isProductBought}) {
                     <div className="w-1/3">
                         <img className='w-full rounded-lg' src={product.picture} alt="" />
                     </div>
-                    <div className="w-2/3 min-h-full flex flex-col justify-between">
+                    <div className="flex flex-col justify-between w-2/3 min-h-full">
                         <div className="flex-1">
-                            <Link className='text-xs font-semibold px-2 py-1 inline-flex bg-blue-500 text-white rounded' href={`/products?category=${product.category.slug}`}>{product.category.name}</Link>
+                            <Link className='inline-flex px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded' href={`/products?category=${product.category.slug}`}>{product.category.name}</Link>
                             <h1 className='text-3xl font-semibold'>{product.name}</h1>
-                            <div className='leading-relaxed text-gray-500 my-4'>{product.description}</div>
-                            <div className='font-semibold text-4xl'>
+                            <div className='my-4 leading-relaxed text-gray-500'>{product.description}</div>
+                            <div className='text-4xl font-semibold'>
                                 <sup>Rp</sup> {numberFormat(product.price)}
                             </div>
                         </div>

@@ -16,12 +16,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         collect([
-            ['name' => $name = 'Laravel', 'slug' => str($name)->slug()],
-            ['name' => $name = 'PHP', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Javascript', 'slug' => str($name)->slug()],
-            ['name' => $name = 'React JS', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Vue JS', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Tailwind CSS', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Blimbing', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Kedungkandang', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Klojen', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Lowokwaru', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Sukun', 'slug' => str($name)->slug()],
         ])->each(fn ($q) => Category::create($q));
     }
 }
