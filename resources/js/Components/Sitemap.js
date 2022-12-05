@@ -48,8 +48,8 @@ export default function Sitemap() {
       <div className="px-4 py-12 mt-16 border-b border-gray-200">
         <div className="flex justify-center mb-8">
           <img
-            src="/images/content/logo.png"
-            alt="Luxspace | Fulfill your house with beautiful furniture"
+            src="/images/Logo.png "width="5%" height="5%"
+            alt="Pengelolahan sampah masyarakat"
           />
         </div>
         <aside className="container mx-auto">
@@ -60,19 +60,12 @@ export default function Sitemap() {
               title="Overview"
             >
               <li>
-                <Link to="/" className="block py-1 hover:underline">
                   Shipping
-                </Link>
+                
               </li>
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  Refund
-                </Link>
+              <li>refund
               </li>
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  Promotion
-                </Link>
+              <li>Promotion
               </li>
             </SitemapLinks>
             <SitemapLinks
@@ -81,19 +74,11 @@ export default function Sitemap() {
               title="Company"
             >
               <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  About
-                </Link>
+                About
               </li>
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  Career
-                </Link>
+              <li>Career
               </li>
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  Contact Us
-                </Link>
+              <li>Contact us
               </li>
             </SitemapLinks>
             <SitemapLinks
@@ -101,23 +86,14 @@ export default function Sitemap() {
               isActive={active === 3 ? null : 3}
               title="Explore"
             >
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  Terms & Conds
-                </Link>
+              <li>Terms & Conds
               </li>
               <li>
-                <Link
-                  to="/privacy-policy"
-                  className="block py-1 hover:underline"
-                >
+                
                   Privacy Policy
-                </Link>
+                
               </li>
-              <li>
-                <Link to="/" className="block py-1 hover:underline">
-                  For Developer
-                </Link>
+              <li>For developer
               </li>
             </SitemapLinks>
             <div className="w-full px-4 mb-4 md:w-3/12 md:mb-0">

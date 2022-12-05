@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->double('price');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->text('description');
             $table->timestamps();
         });

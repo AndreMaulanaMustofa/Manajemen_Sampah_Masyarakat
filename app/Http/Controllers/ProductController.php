@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSingleResource;
 use App\Http\Resources\UserProductResource;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
+
 {
+    public $categories;
+
+    public function __construct()
+    {
+        $this->categories = Category::select('id','name')->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +46,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return inertia('Products/Create');
+        return inertia('Products/Create',[
+            'categories'=> $this->categories,
+        ]);
     }
 
     /**
@@ -49,7 +59,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $picture = $request->file('picture');
+        $product= $request->user()->products()->create([
+            'name' => $name = $request->name,
+            'slug' => $slug = str($name)->slug(),
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'url' => $slug,
+            'picture' => $request->hasFile('picture')? $picture->storeAs('images/products',$slug .'.'. $picture->extension()):null, 
+        ]);
+        return to_route('products.index',$product);
     }
 
     /**
