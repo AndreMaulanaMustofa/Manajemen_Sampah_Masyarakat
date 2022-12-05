@@ -107,7 +107,7 @@ export default function Sitemap() {
                     className="w-full px-5 py-3 bg-gray-100 rounded-xl focus:outline-none"
                     placeholder="Your email adress"
                   />
-                  <button className="absolute right-0 p-3 bg-pink-400 rounded-xl">
+                  <button className="absolute right-0 p-3 bg-green-400 rounded-xl">
                     <svg
                       width="24"
                       height="24"

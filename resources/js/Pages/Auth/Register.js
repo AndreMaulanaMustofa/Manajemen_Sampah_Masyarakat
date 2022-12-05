@@ -45,6 +45,7 @@ export default function Register() {
                     <Input
                         type="text"
                         name="name"
+                        placeholder ="john"
                         value={data.name}
                         className="block w-full mt-1"
                         autoComplete="name"
@@ -60,6 +61,7 @@ export default function Register() {
                     <Input
                         type="email"
                         name="email"
+                        placeholder= "john@mail.com"
                         value={data.email}
                         className="block w-full mt-1"
                         autoComplete="username"
@@ -101,6 +103,7 @@ export default function Register() {
                     <Input
                         type="text"
                         name="phone_number"
+                        placeholder ="08xxxx"
                         value={data.phone_number}
                         className="block w-full mt-1"
                         autoComplete="phone_number"
