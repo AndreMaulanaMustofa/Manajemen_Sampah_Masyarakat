@@ -41,7 +41,7 @@ function DropdownMenu({ buttonClassName = '', label, children }) {
                             />
                         </svg>
                     </Menu.Button>
-                    <Menu.Items className="bg-white py-1 z-50 rounded-lg shadow-sm border absolute w-64 top-full mt-2 right-0 overflow-hidden">
+                    <Menu.Items className="absolute right-0 z-50 w-64 py-1 mt-2 overflow-hidden bg-white border rounded-lg shadow-sm top-full">
                         {children}
                     </Menu.Items>
                 </>
@@ -51,7 +51,7 @@ function DropdownMenu({ buttonClassName = '', label, children }) {
 }
 
 function Divider() {
-    return <div className='bg-gray-200 my-1 w-full block h-px'/>
+    return <div className='block w-full h-px my-1 bg-gray-200'/>
 }
 
 DropdownMenu.Link = Link;

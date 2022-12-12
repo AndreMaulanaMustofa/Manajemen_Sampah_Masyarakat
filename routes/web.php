@@ -14,10 +14,13 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('products/me', [ProductController::class, 'mine'])->middleware('auth')->name('products.mine');
 Route::resource('products', ProductController::class);
-
+// Route::get('/u/{user:username},[]');
 Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('history', HistoryController::class)->name('history');
+    // Route::get('/{user:username}', [ProfileController::class, 'index']);
+
     Route::controller(InvoiceController::class)->group(function () {
         Route::post('invoice', 'store');
         Route::get('invoice/{invoice:order_id}', 'show')->name('invoice.show');
@@ -28,10 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('carts/delete/{cart}', 'destroy')->name('cart.delete');
         Route::post('carts/add-to-cart/{product:slug}', 'store')->name('cart.store');
     });
-    Route::controller(ProfileController::class)->group(function(){
-        Route::get('profile','index');
-        // Route::post('profile/update/{user:slug}','update')->name('user.update');
-    });
+    Route::resource('profile', ProfileController::class);
 });
 
 Route::post('api/notification/handling', [PaymentNoticationController::class, 'hit']);

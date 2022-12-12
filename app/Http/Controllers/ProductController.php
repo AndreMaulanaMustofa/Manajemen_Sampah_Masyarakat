@@ -60,6 +60,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $picture = $request->file('picture');
+
         $product= $request->user()->products()->create([
             'name' => $name = $request->name,
             'slug' => $slug = str($name)->slug(),
@@ -67,7 +68,9 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description,
             'url' => $slug,
-            'picture' => $request->hasFile('picture')? $picture->storeAs('images/products',$slug .'.'. $picture->extension()):null, 
+            'picture' => $request->hasFile('picture') ?
+                $picture->storeAs('/public/images/products',str($request->name)->slug() .'.'. $picture->extension())
+                : null, 
         ]);
         return to_route('products.index',$product);
     }

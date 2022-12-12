@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\UserProductResource;
+use App\Models\Product;
 use App\Models\User;
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,13 +17,18 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $user = User::where('id',Auth::id())->first();
-
-        return inertia('Profile',[
-            'user'=>$user
-        ]);
+        // $products = Product::query()
+        //     ->whereBelongsTo($user, 'name')
+        //     ->fastPaginate(9);
+        // return inertia('Users/Show', [
+        //     'user' => [
+        //         'name' => $user->name,
+        //         'joined' => $user->created_at->diffForHumans(),
+        //     ],
+        //     'articles' => ProductResource::collection($products),
+        // ]);
     }
 
     /**
@@ -60,21 +69,35 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+           return inertia('Profile/Edit',[
+            'user'=>$user,
+            // 'name' =>$this->name,
+            // 'email' =>$this->email,
+            // 'password' => $this->password,
+            // 'phone_number'=>$this->phone_number,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProfileRequest $request, User $user)
     {
-        //
+        
+        $user->update([
+            'name' =>  $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'password' => $request->password,
+        ]);
+
+        return to_route('products.index', $user);
     }
 
     /**
