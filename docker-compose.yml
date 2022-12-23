@@ -18,7 +18,7 @@ services:
     working_dir: /srv/web
     volumes:
       - ./:/srv/web
-      - ${HOME}/.composer:${HOME}/.composer
+      - /.composer:/.composer
   node:
     build:
       context: .
@@ -26,7 +26,7 @@ services:
     working_dir: /srv/web
     volumes:
       - ./:/srv/web
-      - ${HOME}/.npm:${HOME}/.npm
+      - /.npm:/.npm
     command: npm run dev
     ports:
       - 8080:8080
