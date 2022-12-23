@@ -10,6 +10,16 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PaymentNoticationController;
 use App\Http\Controllers\ProfileController;
 
+Route::get('/migrate', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    return \Illuminate\Support\Facades\Artisan::output();
+});
+
+Route::get('/seed', function () {
+    \Illuminate\Support\Facades\Artisan::call('db:seed');
+    return \Illuminate\Support\Facades\Artisan::output();
+});
+
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('products/me', [ProductController::class, 'mine'])->middleware('auth')->name('products.mine');
@@ -35,4 +45,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('api/notification/handling', [PaymentNoticationController::class, 'hit']);
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

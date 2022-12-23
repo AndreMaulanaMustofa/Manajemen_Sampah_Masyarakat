@@ -9,6 +9,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSingleResource;
 use App\Http\Resources\UserProductResource;
 use Illuminate\Support\Facades\Storage;
+use ImageKit\ImageKit;
 
 class ProductController extends Controller
 
@@ -17,7 +18,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->categories = Category::select('id','name')->get();
+        $this->categories = Category::select('id', 'name')->get();
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +34,7 @@ class ProductController extends Controller
             ->paginate(12)
             ->withQueryString();
 
-            // return ProductResource::collection($products);
+        // return ProductResource::collection($products);
         return inertia('Products/Index', [
             'products' => ProductResource::collection($products),
         ]);
@@ -46,8 +47,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return inertia('Products/Create',[
-            'categories'=> $this->categories,
+        return inertia('Products/Create', [
+            'categories' => $this->categories,
         ]);
     }
 
@@ -61,18 +62,37 @@ class ProductController extends Controller
     {
         $picture = $request->file('picture');
 
-        $product= $request->user()->products()->create([
+        $new_name = rand() . '.' . $picture->getClientOriginalExtension();
+        $picture->move(public_path('images/products/'), $new_name);
+
+        $public_key = env('IMAGEKIT_KEY');
+        $your_private_key = env('IMAGEKIT_PRIVATE_KEY');
+        $url_end_point = env('IMAGEKIT_ENDPOINT');
+
+        $imageKit = new ImageKit(
+            $public_key,
+            $your_private_key,
+            $url_end_point
+        );
+
+        // Upload Image - Binary
+        $uploadFile = $imageKit->uploadFile([
+            "file" => fopen(public_path('images/products') . '/' . $new_name, "r"),
+            "fileName" => $new_name
+        ]);
+
+        $picture_new = $uploadFile ? $uploadFile->result->url : null;
+
+        $product = $request->user()->products()->create([
             'name' => $name = $request->name,
             'slug' => $slug = str($name)->slug(),
             'price' => $request->price,
             'category_id' => $request->category_id,
             'description' => $request->description,
             'url' => $slug,
-            'picture' => $request->hasFile('picture') ?
-                $picture->storeAs('/public/images/products',str($request->name)->slug() .'.'. $picture->extension())
-                : null, 
+            'picture' => $picture_new
         ]);
-        return to_route('products.index',$product);
+        return to_route('products.index', $product);
     }
 
     /**
